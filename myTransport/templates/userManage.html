@@ -1,0 +1,413 @@
+{% extends "index.html" %}
+
+
+{% block script %}
+<script src="/static/assets/js/jquery.dataTables.min.js"></script>
+<script src="/static/assets/js/dataTables.bootstrap.min.js"></script>
+
+<script src="/static/assets/js/bootstrap-switch/bootstrap-switch.min.js"></script>
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="/static/assets/js/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet" href="/static/assets/js/bootstrap-switch/bootstrap-switch.min.css" rel='stylesheet' type='text/css' />
+{% endblock %}
+{% block modal %}
+<!-- Modal -->
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<!--span aria-hidden="true">&times;</span-->
+		</button>
+        <h4 class="modal-title" id="modalTitle"></h4>
+      </div>
+      <div class="modal-body">
+		<div class='form-horizontal'>
+			<input type='hidden' id='modalFlag'>
+			<div class="alert alert-info" id='modalTips'>
+				<button class="close" data-dismiss="alert"></button>
+				<strong>Tips:</strong>若不修改密码，请不要填写密码和重复密码栏！
+			</div>
+			<div class='input-group'>
+				<label class="input-group-addon" id="basic-addon1">用户名</label>
+				<input type='text' placeholder='username' id='modalUserName' class='form-control' aria-describedby="basic-addon1">
+				
+			</div>	
+			
+			<div class='input-group'>
+				<label class="input-group-addon" id="basic-addon2">邮箱</label>
+				<input type='text' placeholder='email' id='modalEmail'  class='form-control' aria-describedby="basic-addon2">
+			</div>
+			
+			<div class='input-group'>
+				<label class="input-group-addon" id="basic-addon3">姓名</label>
+				<input type='text' placeholder='name' id='modalName'  class='form-control' aria-describedby="basic-addon3">
+			</div>
+			
+			<div class='input-group'>
+				<label class="input-group-addon" id="basic-addon4">工号</label>
+				<input type='text' placeholder='workId' id='modalWorkId'  class='form-control' aria-describedby="basic-addon4">
+			</div>
+			<div class="is_superuser">
+				<div class='input-group'>
+					<label>是否为管理员</label>
+					<input class="input-group-addon" type='checkbox' id='is_superuser' style='width:23px;height:23px;margin: 10px'>
+				</div>	
+			</div>					
+			<div class="editPass">
+				<div class='input-group'>
+					<label>修改密码</label>
+					<input class="input-group-addon" type='checkbox' id='modalCheck' style='width:23px;height:23px;margin: 10px'>
+			</div>
+			</div>
+			<div class="pwClass">
+				<div class='input-group'>
+					<label class="input-group-addon" id="basic-addon6">密码</label>
+					<input type='password' placeholder='password' id='modalPW'  class='form-control' aria-describedby="basic-addon6">
+				</div>
+			</div>
+			<div class="pwClass">
+				<div class='input-group'>
+					<label class="input-group-addon" id="basic-addon7">确认密码</label>
+					<input type='password' placeholder='Repeat the password' id='modalConfirm' class='form-control' aria-describedby="basic-addon7">
+				</div>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-sm btn-info" onclick='saveData()'>保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock%}
+{%block myContent%}
+
+
+
+<style>
+	.onActive{
+		background:rgb(6, 217, 149);
+	}
+	
+	.onActive>div>div>p{
+		color:white;
+	}
+	
+	.dataTables_filter>label{
+		float:right;
+	}
+	
+	.pagination {
+		display: inline-block;
+		padding-left: 0;
+		border-radius: 4px;
+		margin-top:0px;
+		margin-bottom:0px;
+		float:right;
+	}
+	
+	.form-control {
+		background: none !important;
+		border: 1px solid #ddd !important;
+		border-radius: 0px !important;
+		box-shadow: none !important;
+	}
+	
+	.online-top:hover{
+		background: #dcdbdb;
+	}
+
+
+</style>
+
+
+
+
+<div class="col-md-12 inbox_right" style='margin-top:15px'>
+	<div class="Compose-Message"> 
+		<div class="panel panel-primary">
+			<div class="panel-heading" style='height: initial;padding: 10px;'>
+				<div class="caption">
+					<button class='btn btn-sm btn-info' onclick='openModal("add")'>新增</button>
+					<button class='btn btn-sm btn-danger' onclick='delUserBatch()'>删除</button>
+				</div>
+			</div>
+
+			<div class="panel-body">
+				<table id='userTable' class='table table-bordered table-striped'>
+					<thead>
+						<tr class="headtr">
+							<th><input type='checkbox' id='chb-all'/></th>
+							<th>登录账号</th>
+							<th>姓名</th>
+							<th>管理员</th>
+							<th>邮箱</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+			
+					
+					</tbody>
+				
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	var userTable
+	$(function(){
+	userTable = $('#userTable').DataTable({
+		"ajax": {
+            "url": "/transport/user_get/",
+            "data": function (d) {
+				d.type = 'getData'
+			}
+        },
+        "processing": true,
+        "serverSide": true,
+        "columns": [
+            {
+				"data": null,
+				"orderable": false,
+			},    //checkbox
+			{"data":'username'},
+			{"data":'name'},
+			{"data":'is_superuser'},
+			{"data":'email'},
+            {
+                "data": null,
+                "orderable": false,
+            },
+        ],
+        "order": [[1, 'desc']],
+        "columnDefs": [
+                // 用来生成checkbox
+                {
+                    'targets': 0,
+                    'searchable':false,
+                    'orderable':false,
+                    'className': 'dt-body-center',
+                    'render': function (data, type, full, meta){
+                     return '<input type="checkbox" value="'+full.id+'">';
+                    },
+                },
+                {
+                    targets: 3,
+                    render: function (a, b, c, d) {
+						if(c.is_superuser){
+							return '是'
+						}else{
+							return '否'
+						}
+							
+                    },
+                },                
+                // 用来生成修改按钮
+                {
+                    targets: 5,
+                    render: function (a, b, c, d) {
+						html =  '<button type="button" class="btn btn-sm btn-info" onclick=openModal("update","'+c.username+'","'+c.name+'","'+c.is_superuser+'","'+c.email+'","'+c.workId+'")>修改</button>&nbsp'+
+							'<button class="btn btn-sm btn-danger" onclick=delUser("'+c.username+'","'+c.id+'")>删除</button>&nbsp'
+						return html
+							
+                    },
+                },
+        ],		
+		"oLanguage": {
+			"sProcessing": "正在加载中......",
+			"sLengthMenu": "每页显示 _MENU_ 条记录",
+			"sZeroRecords": "对不起，查询不到相关数据！",
+			"sEmptyTable": "表中无数据存在！",
+			"sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录",
+			"sInfoEmpty":    "显示第 0 至 0 项结果，共 0 项",
+			"sInfoFiltered": "数据表中共为 _MAX_ 条记录",
+			"sSearch": "搜索",
+			"oPaginate": {
+				"sFirst": "首页",
+				"sPrevious": "上一页",
+				"sNext": "下一页",
+				"sLast": "末页"
+			}
+        }, //多语言配置
+	})
+	
+	//全选按钮
+	$('#chb-all').on('click', function(e){
+        var checkbox = document.getElementById('chb-all');
+        $('#userTable tbody td').parent().find('input[type="checkbox"]').map(function(i,n){
+            n.checked = checkbox.checked;
+        });
+    });
+	
+	})
+	
+	//打开更新用户modal
+	function openModal(type,username,name,is_superuser,email,workId){
+		//清除modal数据
+		$('#userModal').find('input').val('')
+		$('.editPass').removeAttr('checked')
+		
+		switch(type){
+			case 'add':
+				$('#modalFlag').val('add')
+				$('#modalTitle').html('新增用户');
+				$('.editPass').css({'display':'none'})
+				$('.pwClass').css({'display':'block'})
+				$('#modalTips').css({'display':'none'})
+				$('#modalUserName').removeAttr('disabled')
+				document.getElementById('is_superuser').checked = false
+				break;
+			case 'update':
+				$('#modalFlag').val('update')
+				$('#modalTitle').html('更新用户信息')
+				$('.editPass').css({'display':'block'})
+				$('.pwClass').css({'display':'none'})
+				$('#modalTips').css({'display':'none'})
+				$('#modalUserName').attr({'disabled':true})
+				$('#modalUserName').val(username)
+				$('#modalEmail').val(email)
+				$('#modalName').val(name)
+				$('#modalWorkId').val(workId)
+				if (is_superuser == "true") {
+					document.getElementById('is_superuser').checked = true
+				}else{
+					document.getElementById('is_superuser').checked = false
+				}
+				break;
+		}
+		$('#userModal').modal('show')
+	}
+	
+	//是否修改密码checkbox事件
+	$('#modalCheck').click(function(){
+		
+		if ($(this).is(':checked')) {
+			$('#modalTips').css({'display':'block'})
+			$('.pwClass').css({'display':'block'})
+		}else{
+			$('#modalTips').css({'display':'none'})
+			$('.pwClass').css({'display':'none'})
+		}
+	})
+	
+	//保存用户数据(更新、保存)
+	function saveData(){
+		var username = $('#modalUserName').val()
+		var email  = $('#modalEmail').val()
+		var name = $('#modalName').val()
+		var is_superuser = 0
+		if (document.getElementById('is_superuser').checked) {
+			is_superuser = 1
+		}		
+	
+		if($('#modalFlag').val()=='add'){
+			url = '/transport/user_add/'
+			var passWord = $('#modalPW').val()
+			var confrimPW = $('#modalConfirm').val()
+			console.log(is_superuser)
+			var data = {'username':username,'email':email,'name':name,'is_superuser':is_superuser,'passWord':passWord,'confrimPW':confrimPW,'workId':$('#modalWorkId').val()}
+		}else{
+			url = '/transport/user_update/'
+			if ($('#modalCheck').is(':checked')) {
+				var passWord = $('#modalPW').val()
+				var confrimPW = $('#modalConfirm').val()
+			}else{
+				var passWord = ''
+				var confrimPW = ''
+			}
+			var data ={'username':username,'email':email,'name':name,'is_superuser':is_superuser,'passWord':passWord,'confrimPW':confrimPW,'type':'updateMsg','workId':$('#modalWorkId').val()}
+		}
+		
+		var checkList = ['username','email','name','workId']
+		for(var index=0;index<checkList.length;index++){
+			if (data[index] == ''){
+				showError('【'+index+'】'+'不能为空！')
+				return false
+			}
+		}
+		
+		
+		if (passWord!=confrimPW){
+			showError('两次输入密码不匹配')
+			return false
+		}
+		if (username=='' || email =='' ||name == ""){
+			showError('用户信息不全')
+		}
+	
+
+		$.post(url,
+		data,
+		function(result){
+			if(result.code){
+				$('#userModal').modal('hide')
+				reflashDT()
+			}else{
+				showError(result.msg)
+			}
+		},'json')
+	
+	}
+	
+
+	//执行删除操作
+	function delUser(username,id){
+		alertify.confirm('您确定要删除【'+username+'】用户吗？',
+		function(e){
+			if(e){
+				$.post('/transport/user_del/',
+				{'type':'single','id':id},
+				function(result){
+					if(result.code){
+						userTable.ajax.reload()
+					}else{
+						showError(result.msg)
+					}
+				})
+			}
+		})
+	}
+	
+	//批量删除操作
+	function delUserBatch(){
+		idList = new Array()
+		$('#userTable tbody td').parent().find('input[type="checkbox"]').map(function(i,n){
+			if (n.checked){
+				idList.push($(this).val())
+			}
+        });
+		if(idList.length==0){
+			showError('请先选择用户')
+			return false
+		}
+		
+		alertify.confirm('您确定要删除所选用户吗？',
+		function(e){
+			if(e){
+				$.post('/transport/user_del/',
+				{'type':'batch','idList':$.toJSON(idList)},
+				function(result){
+					if(result.code){
+						userTable.ajax.reload()
+					}else{
+						showError(result.msg)
+					}
+				})
+			}
+		})
+	}
+	
+	
+	function reflashDT(){
+		userTable.ajax.reload()
+	}
+</script>
+
+
+{% endblock %}
+

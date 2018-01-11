@@ -1,0 +1,321 @@
+{% extends "index.html" %}
+
+{% block modal %}
+<div class="modal fade" id="createDirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+		<div class='form-horizontal'>
+			<input type='hidden' flag='saveFlag'/>
+			<div class="alert alert-error" tid='errorMsg' style='display:none'>
+				
+			</div>
+			<div class='form-group'>
+				<label class='col-sm-2 control-label'>文件夹名:</label>
+				<div class='col-sm-9'>
+					<input type='text' placeholder='文件夹' id='directoryName' class='form-control'>
+				</div>
+			</div>
+			
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-white" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-sm btn-info" onclick='saveDir(this)'>保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{%block myContent%}
+<style type="text/css">
+table tr.dir-item {
+	cursor: pointer;
+}
+</style>
+<div class="container-fluid">
+	<div class="panel panel-default">
+	
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				本地上传
+			</h3>
+		</div>
+		
+		<div class="panel-body">
+			
+
+			
+			<br />
+			<div class="row">
+				<div class="col-sm-3 text-center">
+				
+					<div id="advancedDropzone" class="droppable-area">
+						Drop Or Click
+					</div>
+					
+				</div>
+				<div class="col-sm-9">
+					
+					<table class="table table-bordered table-striped" id="example-dropzone-filetable">
+						<thead>
+							<tr>
+								<th width="4%" class="text-center">#</th>
+								<th width="50%">Name</th>
+								<th width="20%">Upload Progress</th>
+								<th>Size</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="5">Files list will appear here</td>
+							</tr>
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+			
+		</div>
+	
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				服务端资源
+			</h3>			
+		</div>
+		<div class="panel-body">
+			<div class="col-sm-6">
+				<ol class="breadcrumb bc-1">
+								
+				</ol>				
+			</div>
+			<div class="col-sm-3">
+				<button type="button" class="btn btn-sm btn-white" onclick='createDir()'>新建文件夹</button>
+			</div>		
+			<table id="sourceTable" class="table table-hover">
+				<thead>
+					<th>name</th>
+					<th>size</th>
+					<th>lastUpdate</th>
+					<th>operation</th>
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>			
+		</div>
+	</div>	
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function($)
+	{
+		var i = 1,
+			$example_dropzone_filetable = $("#example-dropzone-filetable"),
+			example_dropzone = $("#advancedDropzone").dropzone({
+			url: '/transport/upload/',
+			maxFilesize:100,  //最多一次上传100M
+			maxFiles:100,     //最多一次上传100个文件
+			addRemoveLinks:true,
+			acceptedFiles:'image/*,video/*',  //只允许视频和图片的上传
+			dictInvalidFileType: "你不能上传该类型文件,文件类型只能是图片或视频。",
+			dictFileTooBig:"文件过大上传文件最大支持.",
+			dictFallbackMessage:"浏览器不受支持",
+			//headers:{"custom-header": $('.breadcrumb li.active a').attr('relative_path')},
+			//headers:{'relative_path':$('.breadcrumb li a').attr('relative_path')},
+			// Events
+			addedfile: function(file)
+			{
+				if(i == 1)
+				{
+					$example_dropzone_filetable.find('tbody').html('');
+				}
+				var _this = this;
+				this.options.headers = {"relative-path": $('.breadcrumb li.active a').attr('relative_path')}
+				var size = parseInt(file.size/1024, 10);
+				size = size < 1024 ? (size + " KB") : (parseInt(size/1024, 10) + " MB");
+				
+				var	$el = $('<tr>\
+								<td class="text-center">'+(i++)+'</td>\
+								<td>'+file.name+'</td>\
+								<td><div class="progress progress-striped"><div class="progress-bar progress-bar-warning"></div></div></td>\
+								<td>'+size+'</td>\
+								<td>Uploading...</td>\
+							</tr>');
+				
+				$example_dropzone_filetable.find('tbody').append($el);
+				file.fileEntryTd = $el;
+				file.progressBar = $el.find('.progress-bar');
+
+			},
+			
+			uploadprogress: function(file, progress, bytesSent)
+			{
+				file.progressBar.width(progress + '%');
+			},
+			success: function(file,result)
+			{
+				if (result.code===200) {
+					file.fileEntryTd.find('td:last').html('<span class="text-success">Uploaded</span>');
+					file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-success');
+					loadTableData($('#sourceTable'),getListFromClient($('.breadcrumb li.active a').attr('relative_path')))
+				}else{
+					file.fileEntryTd.find('td:last').html('<span class="text-danger">Failed</span>');
+					file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-red');
+					showError(result.msg)						
+				}
+			},
+			error: function(file)
+			{
+				file.fileEntryTd.find('td:last').html('<span class="text-danger">Failed</span>');
+				file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-red');
+			}
+		});
+		$("#advancedDropzone").css({
+			minHeight: 200
+		});
+
+	});
+			</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	loadTableData($('#sourceTable'),getListFromClient(''))
+	$(document).on('click','button#download_file',function(event){
+		var filename = $(this).closest('tr').find('td').eq(0).text()
+		var relative_path = $($(this).closest('tr')).attr('relative_path')
+		var a = document.createElement('a');
+        var url = '/transport/downloadFile/?relative_path='+relative_path+'&filename='+filename;
+        a.href = url;
+        a.download = filename;
+        a.click();		
+	})
+	$(document).on('click','button#remove_file',function(event){
+		var filename = $(this).closest('tr').find('td').eq(0).text()
+		var relative_path = $($(this).closest('tr')).attr('relative_path')	
+		removeFile(relative_path,filename)
+	})
+	$(document).on('click','tr.dir-item',function(event){
+		if (event.target.tagName != 'SPAN'){
+			var filename = $(this).closest('tr').find('td').eq(0).text()
+			var relative_path = $(this).attr('relative_path')+filename+"/"	
+			loadTableData($('#sourceTable'),getListFromClient(relative_path))	
+		}
+	})
+	$(document).on('click','.breadcrumb li a',function(event){
+		var relative_path = $(this).attr('relative_path')
+		loadTableData($('#sourceTable'),getListFromClient(relative_path))
+	})
+})
+function getListFromClient(relative_path){
+	var data = null
+	$.ajax({
+		'url':'/transport/file_list/',
+		'type':'POST',
+		'async':false,
+		'dataType':'json',
+		'data':{'relative_path':relative_path},
+		'success':function(result)
+		{
+			if (result.code === 200 ){
+				data = result.data
+			}else {
+				showError(result.msg)
+			}
+		}
+	})	
+	return data
+}
+function loadTableData($table,data){
+	var button_html = '<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="下载" id="download_file"><span class="fa-download" aria-hidden="true"></span></button>&nbsp<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="删除" id="remove_file"><span class="fa-trash" aria-hidden="true"></span></button>'
+	$table.children('tbody').html('')
+	var relative_path = data.relative_path
+	if (relative_path != "") {
+		path_html = '<li><a href="#" relative_path=""><i class="fa-home"></i>主目录</a></li>'
+		var temp_path = ""
+		var path_list = relative_path.split('/').slice(0, -1)
+		$.each(path_list,function(i,value){
+			if (value != "") {
+				temp_path += value + "/"
+				if ((i+1) == path_list.length) {
+					path_html += '<li class="active"><a href="#" relative_path="'+temp_path+'">'+value+'</a></li>'
+				}else{
+					path_html += '<li ><a href="#" relative_path="'+temp_path+'">'+value+'</a></li>'
+				}
+			}
+		})
+		$('.breadcrumb').html(path_html)
+	}else{	
+		$('.breadcrumb').html('<li class="active"><a href="#" relative_path=""><i class="fa-home"></i>主目录</a></li>')
+	}
+	
+	$.each(data.dirs,function(i, value) {
+		var size = parseInt(value.fsize/1024, 10);
+			size = size < 1024 ? (size + " KB") : (parseInt(size/1024, 10) + " MB");		
+		html = '<tr class="dir-item" relative_path="'+relative_path+'"><td><i class="fa fa-folder fa-fw"></i>'+value.name+'</td><td>'+""+'</td><td>'+value.fmtime+'</td><td>'+button_html+'</td></tr>'
+		$table.children('tbody').append(html)
+	});
+	$.each(data.files,function(i, value) {
+		var size = parseInt(value.fsize/1024, 10);
+			size = size < 1024 ? (size + " KB") : (parseInt(size/1024, 10) + " MB");		
+		html = '<tr class="file-item" relative_path="'+relative_path+'"><td><i class="fa fa-file-text-o fa-fw"></i>'+value.name+'</td><td>'+size+'</td><td>'+value.fmtime+'</td><td>'+ button_html +'</td></tr>'
+		$table.children('tbody').append(html)
+	});	
+}
+function createDir(){
+	$('#createDirModal').modal('show')
+	$('#directoryName').val('')
+}
+function saveDir(){
+	$('#createDirModal').modal('hide')
+	var relative_path = $('.breadcrumb li.active a').attr('relative_path')
+	$.ajax({
+		'url':'/transport/createDir/',
+		'type':'POST',
+		'async':false,
+		'dataType':'json',
+		'data':{'relative_path':relative_path,'dirName':$('#directoryName').val()},
+		'success':function(result)
+		{
+			if (result.code === 200 ){
+				showInfo('创建成功！')
+				loadTableData($('#sourceTable'),getListFromClient(relative_path))
+			}else {
+				showError(result.msg)
+				loadTableData($('#sourceTable'),getListFromClient(relative_path))
+			}
+		}
+	})		
+}
+function removeFile(relative_path,filename){
+	alertify.confirm('您确定要删除【'+filename+'】吗？',
+		function(e){
+			if(e){	
+				$.ajax({
+					'url':'/transport/removeFile/',
+					'type':'POST',
+					'async':false,
+					'dataType':'json',
+					'data':{'relative_path':relative_path,'filename':filename},
+					'success':function(result)
+					{
+						if (result.code === 200 ){
+							showInfo('删除成功！')
+							loadTableData($('#sourceTable'),getListFromClient(relative_path))
+						}else {
+							showError(result.msg)
+							loadTableData($('#sourceTable'),getListFromClient(relative_path))
+						}
+					}
+				})	
+			}
+		}
+	)		
+}
+</script>
+
+{% endblock %}

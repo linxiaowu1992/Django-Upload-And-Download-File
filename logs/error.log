@@ -1,0 +1,519 @@
+2018-01-08 10:05:31,556 [myTransport.views:103] [views:upload_file] [ERROR]- 发生异常:'Settings' object has no attribute 'CLIENT_OPTION_URL'
+2018-01-08 10:05:45,110 [myTransport.views:103] [views:upload_file] [ERROR]- 发生异常:'Settings' object has no attribute 'CLIENT_OPTION_URL'
+2018-01-08 10:05:58,945 [myTransport.views:103] [views:upload_file] [ERROR]- 发生异常:'Settings' object has no attribute 'CLIENT_OPTION_URL'
+2018-01-08 10:06:29,553 [myTransport.views:103] [views:upload_file] [ERROR]- 发生异常:global name 'urllib' is not defined
+2018-01-08 10:07:01,760 [myTransport.views:103] [views:upload_file] [ERROR]- 发生异常:global name 'self' is not defined
+2018-01-08 10:07:18,936 [myTransport.views:103] [views:upload_file] [ERROR]- 发生异常:global name 'self' is not defined
+2018-01-08 10:07:36,031 [myTransport.views:103] [views:upload_file] [ERROR]- 发生异常:HTTP Error 404: NOT FOUND
+2018-01-08 10:07:58,311 [myTransport.views:103] [views:upload_file] [ERROR]- 发生异常:global name 'json' is not defined
+2018-01-08 13:24:46,771 [myTransport.views:114] [views:upload_file] [ERROR]- 发生异常:'User' object has no attribute 'startswith'
+2018-01-08 13:25:56,709 [myTransport.views:114] [views:upload_file] [ERROR]- 发生异常:'InMemoryUploadedFile' object has no attribute 'startswith'
+2018-01-09 02:49:23,083 [myTransport.views:137] [views:upload_file] [ERROR]- 发生异常:global name 'time' is not defined
+2018-01-09 03:54:32,510 [myTransport.views:164] [views:download_file] [ERROR]- 发生异常:local variable 'full_path' referenced before assignment
+2018-01-09 03:55:29,701 [myTransport.views:164] [views:download_file] [ERROR]- 发生异常:'ascii' codec can't decode byte 0xe7 in position 0: ordinal not in range(128)
+2018-01-09 03:57:13,008 [myTransport.views:164] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 149, in download_file
+    logger.info('用户%s下载文件%s...' % (str(request.user),full_path))
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xe7 in position 0: ordinal not in range(128)
+2018-01-09 03:57:13,008 [myTransport.views:165] [views:download_file] [ERROR]- 发生异常:'ascii' codec can't decode byte 0xe7 in position 0: ordinal not in range(128)
+2018-01-09 03:58:59,367 [myTransport.views:164] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 149, in download_file
+    logger.info('用户%s下载文件%s...' % (str(request.user),unicode(full_path)))
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xe7 in position 0: ordinal not in range(128)
+2018-01-09 03:58:59,367 [myTransport.views:165] [views:download_file] [ERROR]- 发生异常:'ascii' codec can't decode byte 0xe7 in position 0: ordinal not in range(128)
+2018-01-09 03:59:38,694 [myTransport.views:164] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 149, in download_file
+    logger.info('用户%s下载文件%s...' % (str(request.user),unicode(full_path,"utf8")))
+TypeError: decoding Unicode is not supported
+2018-01-09 03:59:38,694 [myTransport.views:165] [views:download_file] [ERROR]- 发生异常:decoding Unicode is not supported
+2018-01-09 04:00:35,463 [myTransport.views:164] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 149, in download_file
+    logger.info(u'用户%s下载文件%s...' % (str(request.user),unicode(full_path,"utf8")))
+TypeError: decoding Unicode is not supported
+2018-01-09 04:00:35,463 [myTransport.views:165] [views:download_file] [ERROR]- 发生异常:decoding Unicode is not supported
+2018-01-09 04:00:47,801 [myTransport.views:164] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 153, in download_file
+    big_file_download(request, request_path, requestData['filename'])
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 202, in big_file_download
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(filename)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-6: ordinal not in range(128)
+2018-01-09 04:00:47,801 [myTransport.views:165] [views:download_file] [ERROR]- 发生异常:'ascii' codec can't encode characters in position 0-6: ordinal not in range(128)
+2018-01-09 04:01:06,926 [myTransport.views:164] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 153, in download_file
+    big_file_download(request, request_path, requestData['filename'])
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 202, in big_file_download
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(filename)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-6: ordinal not in range(128)
+2018-01-09 04:01:06,926 [myTransport.views:165] [views:download_file] [ERROR]- 发生异常:'ascii' codec can't encode characters in position 0-6: ordinal not in range(128)
+2018-01-09 04:02:02,496 [myTransport.views:164] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 149, in download_file
+    logger.info(u'用户%s下载文件%s...' % (str(request.user),full_path.encode("utf-8")))
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xe5 in position 15: ordinal not in range(128)
+2018-01-09 04:02:02,497 [myTransport.views:165] [views:download_file] [ERROR]- 发生异常:'ascii' codec can't decode byte 0xe5 in position 15: ordinal not in range(128)
+2018-01-09 04:03:17,541 [myTransport.views:164] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 149, in download_file
+    logger.info(u'用户%s下载文件%s...' % (str(request.user),full_path.encode("gb2312")))
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xc4 in position 15: ordinal not in range(128)
+2018-01-09 04:03:17,542 [myTransport.views:165] [views:download_file] [ERROR]- 发生异常:'ascii' codec can't decode byte 0xc4 in position 15: ordinal not in range(128)
+2018-01-09 04:04:31,252 [myTransport.views:164] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 149, in download_file
+    logger.info(u'用户%s下载文件%s...' % (str(request.user),full_path.decode("gbk", "ignore")))
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 15-21: ordinal not in range(128)
+2018-01-09 04:04:31,253 [myTransport.views:165] [views:download_file] [ERROR]- 发生异常:'ascii' codec can't encode characters in position 15-21: ordinal not in range(128)
+2018-01-09 04:04:44,860 [myTransport.views:164] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 149, in download_file
+    logger.info('用户%s下载文件%s...' % (str(request.user),full_path.decode("gbk", "ignore")))
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 15-21: ordinal not in range(128)
+2018-01-09 04:04:44,860 [myTransport.views:165] [views:download_file] [ERROR]- 发生异常:'ascii' codec can't encode characters in position 15-21: ordinal not in range(128)
+2018-01-09 04:05:05,200 [myTransport.views:164] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 149, in download_file
+    logger.info('用户%s下载文件%s...' % (str(request.user),full_path.encode()))
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 15-21: ordinal not in range(128)
+2018-01-09 04:05:05,200 [myTransport.views:165] [views:download_file] [ERROR]- 发生异常:'ascii' codec can't encode characters in position 15-21: ordinal not in range(128)
+2018-01-09 04:05:29,044 [myTransport.views:164] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 153, in download_file
+    big_file_download(request, request_path, requestData['filename'])
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 202, in big_file_download
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(filename)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-6: ordinal not in range(128)
+2018-01-09 04:05:29,044 [myTransport.views:165] [views:download_file] [ERROR]- 发生异常:'ascii' codec can't encode characters in position 0-6: ordinal not in range(128)
+2018-01-09 04:10:05,546 [myTransport.views:164] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 153, in download_file
+    big_file_download(request, request_path, requestData['filename'])
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 202, in big_file_download
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(filename)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-6: ordinal not in range(128)
+2018-01-09 04:10:05,547 [myTransport.views:165] [views:download_file] [ERROR]- 发生异常:'ascii' codec can't encode characters in position 0-6: ordinal not in range(128)
+2018-01-09 07:03:02,676 [myTransport.views:151] [views:download_file] [ERROR]- 文件路径/tmp/AnonymousUser/内传外美术资源WEB工具.docx不存在！
+2018-01-09 07:13:03,167 [myTransport.views:168] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 144, in download_file
+    qs = User.objects.get(username=request.user)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/query.py", line 334, in get
+    self.model._meta.object_name
+DoesNotExist: User matching query does not exist.
+2018-01-09 07:13:03,193 [myTransport.views:169] [views:download_file] [ERROR]- 发生异常:User matching query does not exist.
+2018-01-09 07:14:57,963 [myTransport.views:147] [views:download_file] [ERROR]- 非法用户！
+2018-01-09 08:52:20,163 [myTransport.views:190] [views:upload_file] [ERROR]- 发生异常:(1062, "Duplicate entry '12' for key 'user_id'")
+2018-01-09 08:55:06,139 [myTransport.views:190] [views:upload_file] [ERROR]- 发生异常:(1062, "Duplicate entry '12' for key 'user_id'")
+2018-01-09 09:06:34,926 [myTransport.views:190] [views:upload_file] [ERROR]- 发生异常:global name 'a' is not defined
+2018-01-09 09:52:26,812 [myTransport.views:146] [views:upload_file] [ERROR]- 非法Ip:192.168.59.1
+2018-01-09 09:57:11,783 [myTransport.views:152] [views:upload_file] [ERROR]- 非法Ip:192.168.59.1
+2018-01-09 12:09:02,432 [myTransport.views:154] [views:upload_file] [ERROR]- 非法Ip:192.168.59.1
+2018-01-09 12:10:04,775 [myTransport.views:158] [views:upload_file] [ERROR]- 用户的上传数额已达最大限制！
+2018-01-09 12:15:57,896 [myTransport.views:254] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 242, in download_file
+    ops_time=datetime.datetime.now())
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/query.py", line 348, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/base.py", line 734, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/base.py", line 762, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/base.py", line 846, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/base.py", line 885, in _do_insert
+    using=using, raw=raw)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/query.py", line 920, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 974, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/backends/mysql/base.py", line 124, in execute
+    return self.cursor.execute(query, args)
+  File "/root/django/django1.8/lib/python2.7/site-packages/MySQLdb/cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "/root/django/django1.8/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (1366, "Incorrect string value: '\\xE8\\xBF\\x90\\xE7\\xBB\\xB4...' for column 'file' at row 1")
+2018-01-09 12:15:57,947 [myTransport.views:255] [views:download_file] [ERROR]- 发生异常:(1366, "Incorrect string value: '\\xE8\\xBF\\x90\\xE7\\xBB\\xB4...' for column 'file' at row 1")
+2018-01-09 12:17:42,831 [myTransport.views:254] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 242, in download_file
+    ops_time=datetime.datetime.now())
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/query.py", line 348, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/base.py", line 734, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/base.py", line 762, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/base.py", line 846, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/base.py", line 885, in _do_insert
+    using=using, raw=raw)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/query.py", line 920, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 974, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/backends/mysql/base.py", line 124, in execute
+    return self.cursor.execute(query, args)
+  File "/root/django/django1.8/lib/python2.7/site-packages/MySQLdb/cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "/root/django/django1.8/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (1366, "Incorrect string value: '\\xE5\\xBC\\x80\\xE5\\x8F\\x91...' for column 'file' at row 1")
+2018-01-09 12:17:42,833 [myTransport.views:255] [views:download_file] [ERROR]- 发生异常:(1366, "Incorrect string value: '\\xE5\\xBC\\x80\\xE5\\x8F\\x91...' for column 'file' at row 1")
+2018-01-09 12:45:08,532 [myTransport.views:278] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 263, in logOption
+    return render_to_response('log.html',{},context_instance=RequestContext(request))
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/shortcuts.py", line 45, in render_to_response
+    using=using)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loader.py", line 115, in render_to_string
+    template_name, context, context_instance, dirs, dictionary)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/engine.py", line 208, in render_to_string
+    t = self.get_template(template_name, dirs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/engine.py", line 167, in get_template
+    template, origin = self.find_template(template_name, dirs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/engine.py", line 141, in find_template
+    source, display_name = loader(name, dirs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loaders/base.py", line 13, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loaders/base.py", line 23, in load_template
+    template = Template(source, origin, template_name, self.engine)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/base.py", line 190, in __init__
+    self.nodelist = engine.compile_string(template_string, origin)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/engine.py", line 261, in compile_string
+    return parser.parse()
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/base.py", line 341, in parse
+    compiled_result = compile_func(self, token)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loader_tags.py", line 210, in do_extends
+    nodelist = parser.parse()
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/base.py", line 341, in parse
+    compiled_result = compile_func(self, token)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loader_tags.py", line 184, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/base.py", line 348, in parse
+    self.unclosed_block_tag(parse_until)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/debug.py", line 65, in unclosed_block_tag
+    raise self.source_error(source, msg)
+TemplateSyntaxError: Unclosed tag 'block'. Looking for one of: endblock 
+2018-01-09 12:45:08,568 [myTransport.views:279] [views:logOption] [ERROR]- 发生异常：Unclosed tag 'block'. Looking for one of: endblock 
+2018-01-09 12:46:29,953 [myTransport.views:278] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 263, in logOption
+    return render_to_response('log.html',{},context_instance=RequestContext(request))
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/shortcuts.py", line 45, in render_to_response
+    using=using)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loader.py", line 115, in render_to_string
+    template_name, context, context_instance, dirs, dictionary)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/engine.py", line 208, in render_to_string
+    t = self.get_template(template_name, dirs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/engine.py", line 167, in get_template
+    template, origin = self.find_template(template_name, dirs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/engine.py", line 141, in find_template
+    source, display_name = loader(name, dirs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loaders/base.py", line 13, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loaders/base.py", line 23, in load_template
+    template = Template(source, origin, template_name, self.engine)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/base.py", line 190, in __init__
+    self.nodelist = engine.compile_string(template_string, origin)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/engine.py", line 261, in compile_string
+    return parser.parse()
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/base.py", line 341, in parse
+    compiled_result = compile_func(self, token)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loader_tags.py", line 210, in do_extends
+    nodelist = parser.parse()
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/base.py", line 341, in parse
+    compiled_result = compile_func(self, token)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loader_tags.py", line 184, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/base.py", line 348, in parse
+    self.unclosed_block_tag(parse_until)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/debug.py", line 65, in unclosed_block_tag
+    raise self.source_error(source, msg)
+TemplateSyntaxError: Unclosed tag 'block'. Looking for one of: endblock 
+2018-01-09 12:46:29,953 [myTransport.views:279] [views:logOption] [ERROR]- 发生异常：Unclosed tag 'block'. Looking for one of: endblock 
+2018-01-09 12:46:31,068 [myTransport.views:278] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 263, in logOption
+    return render_to_response('log.html',{},context_instance=RequestContext(request))
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/shortcuts.py", line 45, in render_to_response
+    using=using)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loader.py", line 115, in render_to_string
+    template_name, context, context_instance, dirs, dictionary)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/engine.py", line 208, in render_to_string
+    t = self.get_template(template_name, dirs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/engine.py", line 167, in get_template
+    template, origin = self.find_template(template_name, dirs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/engine.py", line 141, in find_template
+    source, display_name = loader(name, dirs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loaders/base.py", line 13, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loaders/base.py", line 23, in load_template
+    template = Template(source, origin, template_name, self.engine)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/base.py", line 190, in __init__
+    self.nodelist = engine.compile_string(template_string, origin)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/engine.py", line 261, in compile_string
+    return parser.parse()
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/base.py", line 341, in parse
+    compiled_result = compile_func(self, token)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loader_tags.py", line 210, in do_extends
+    nodelist = parser.parse()
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/base.py", line 341, in parse
+    compiled_result = compile_func(self, token)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/loader_tags.py", line 184, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/base.py", line 348, in parse
+    self.unclosed_block_tag(parse_until)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/template/debug.py", line 65, in unclosed_block_tag
+    raise self.source_error(source, msg)
+TemplateSyntaxError: Unclosed tag 'block'. Looking for one of: endblock 
+2018-01-09 12:46:31,069 [myTransport.views:279] [views:logOption] [ERROR]- 发生异常：Unclosed tag 'block'. Looking for one of: endblock 
+2018-01-10 02:03:21,822 [myTransport.views:301] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 287, in logOption
+    qs = Q()
+NameError: global name 'Q' is not defined
+2018-01-10 02:03:21,822 [myTransport.views:302] [views:logOption] [ERROR]- 发生异常：global name 'Q' is not defined
+2018-01-10 02:04:01,061 [myTransport.views:302] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 296, in logOption
+    resultData = [item.show_table() for item in action_log.objects.all().order_by(order)[start:start+length]]
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/query.py", line 162, in __iter__
+    self._fetch_all()
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/query.py", line 965, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/query.py", line 238, in iterator
+    results = compiler.execute_sql()
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 829, in execute_sql
+    sql, params = self.as_sql()
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 378, in as_sql
+    extra_select, order_by, group_by = self.pre_sql_setup()
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 49, in pre_sql_setup
+    order_by = self.get_order_by()
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 286, in get_order_by
+    field, self.query.get_meta(), default_order=asc))
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 558, in find_ordering_name
+    field, targets, alias, joins, path, opts = self._setup_joins(pieces, opts, alias)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 591, in _setup_joins
+    pieces, opts, alias)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1471, in setup_joins
+    names, opts, allow_many, fail_on_missing=True)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1396, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+FieldError: Cannot resolve keyword 'username' into field. Choices are: action, file, file_size, id, ops_time, remote_addr, user, user_id
+2018-01-10 02:04:01,063 [myTransport.views:303] [views:logOption] [ERROR]- 发生异常：Cannot resolve keyword 'username' into field. Choices are: action, file, file_size, id, ops_time, remote_addr, user, user_id
+2018-01-10 02:07:26,805 [myTransport.views:302] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 297, in logOption
+    resultData['recordsTotal'] = action_log.objects.all().count()
+TypeError: list indices must be integers, not str
+2018-01-10 02:07:26,806 [myTransport.views:303] [views:logOption] [ERROR]- 发生异常：list indices must be integers, not str
+2018-01-10 02:07:58,757 [myTransport.views:302] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 297, in logOption
+    resultData['recordsTotal'] = action_log.objects.all().count()
+TypeError: list indices must be integers, not str
+2018-01-10 02:07:58,757 [myTransport.views:303] [views:logOption] [ERROR]- 发生异常：list indices must be integers, not str
+2018-01-10 02:11:07,103 [myTransport.views:302] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 297, in logOption
+    resultData['recordsTotal'] = action_log.objects.all().count()
+TypeError: list indices must be integers, not str
+2018-01-10 02:11:07,103 [myTransport.views:303] [views:logOption] [ERROR]- 发生异常：list indices must be integers, not str
+2018-01-10 02:15:09,146 [myTransport.views:302] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 297, in logOption
+    resultData['recordsTotal'] = int(action_log.objects.all().count())
+TypeError: list indices must be integers, not str
+2018-01-10 02:15:09,147 [myTransport.views:303] [views:logOption] [ERROR]- 发生异常：list indices must be integers, not str
+2018-01-10 02:17:20,126 [myTransport.views:304] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 298, in logOption
+    logger.info(typeof(action_log.objects.all().count()))
+NameError: global name 'typeof' is not defined
+2018-01-10 02:17:20,126 [myTransport.views:305] [views:logOption] [ERROR]- 发生异常：global name 'typeof' is not defined
+2018-01-10 02:17:37,328 [myTransport.views:304] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 299, in logOption
+    resultData['recordsTotal'] = action_log.objects.all().count()
+TypeError: list indices must be integers, not str
+2018-01-10 02:17:37,329 [myTransport.views:305] [views:logOption] [ERROR]- 发生异常：list indices must be integers, not str
+2018-01-10 02:18:46,638 [myTransport.views:302] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 297, in logOption
+    resultData['recordsTotal'] = action_log.objects.all().count()
+TypeError: list indices must be integers, not str
+2018-01-10 02:18:46,639 [myTransport.views:303] [views:logOption] [ERROR]- 发生异常：list indices must be integers, not str
+2018-01-10 02:21:28,569 [myTransport.views:304] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 299, in logOption
+    resultData['recordsTotal'] = action_log.objects.all().count()
+TypeError: list indices must be integers, not str
+2018-01-10 02:21:28,569 [myTransport.views:305] [views:logOption] [ERROR]- 发生异常：list indices must be integers, not str
+2018-01-10 02:24:26,952 [myTransport.views:305] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 299, in logOption
+    logger.info(resultData['recordsTotal'])
+TypeError: list indices must be integers, not str
+2018-01-10 02:24:26,953 [myTransport.views:306] [views:logOption] [ERROR]- 发生异常：list indices must be integers, not str
+2018-01-10 02:30:49,291 [myTransport.views:302] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 284, in logOption
+    order = orderable[str(request.GET.get('order[0][column]'))]
+KeyError: 'None'
+2018-01-10 02:30:49,292 [myTransport.views:303] [views:logOption] [ERROR]- 发生异常：'None'
+2018-01-10 02:31:09,278 [myTransport.views:302] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 284, in logOption
+    order = orderable[str(request.GET.get('order[0][column]'))]
+KeyError: '0'
+2018-01-10 02:31:09,278 [myTransport.views:303] [views:logOption] [ERROR]- 发生异常：'0'
+2018-01-10 04:15:05,873 [myTransport.views:271] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 239, in download_file
+    logger.info('路径为目录，开始打包压缩目录%s...' % download_path)
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xe8 in position 0: ordinal not in range(128)
+2018-01-10 04:15:05,874 [myTransport.views:272] [views:download_file] [ERROR]- 发生异常:'ascii' codec can't decode byte 0xe8 in position 0: ordinal not in range(128)
+2018-01-10 04:15:58,837 [myTransport.views:271] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 242, in download_file
+    with tarfile.open(os.path.join(settings.TAR_TEMP_DIR,os.path.basename(download_path)),"w:gz") as tar:
+NameError: global name 'tarfile' is not defined
+2018-01-10 04:15:58,838 [myTransport.views:272] [views:download_file] [ERROR]- 发生异常:global name 'tarfile' is not defined
+2018-01-10 04:24:01,921 [myTransport.views:273] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 242, in download_file
+    console.log(os.path.basename(download_path))
+NameError: global name 'console' is not defined
+2018-01-10 04:24:01,922 [myTransport.views:274] [views:download_file] [ERROR]- 发生异常:global name 'console' is not defined
+2018-01-10 04:25:01,677 [myTransport.views:274] [views:download_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 242, in download_file
+    logger.log(os.path.basename(download_path))
+TypeError: log() takes at least 3 arguments (2 given)
+2018-01-10 04:25:01,677 [myTransport.views:275] [views:download_file] [ERROR]- 发生异常:log() takes at least 3 arguments (2 given)
+2018-01-10 06:40:50,211 [myTransport.views:216] [views:upload_file] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 147, in upload_file
+    logger.info(requestData.META)
+AttributeError: 'QueryDict' object has no attribute 'META'
+2018-01-10 06:40:50,211 [myTransport.views:217] [views:upload_file] [ERROR]- 发生异常:'QueryDict' object has no attribute 'META'
+2018-01-10 08:25:27,091 [myTransport.views:306] [views:createDir] [ERROR]- global name 'requst' is not defined
+2018-01-10 08:37:53,502 [myTransport.views:353] [views:logOption] [ERROR]- Exception Logged
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 344, in logOption
+    resultData['recordsTotal'] = action_log.objects.filter(qs).count()
+TypeError: list indices must be integers, not str
+2018-01-10 08:37:53,502 [myTransport.views:354] [views:logOption] [ERROR]- 发生异常：list indices must be integers, not str
+2018-01-10 08:48:34,846 [myTransport.views:500] [views:userOption] [ERROR]- error_500.html
+2018-01-10 08:50:13,805 [myTransport.views:501] [views:userOption] [ERROR]- error_500.html
+2018-01-10 09:30:52,622 [myTransport.views:500] [views:userOption] [ERROR]- 'is_superuser' is an invalid keyword argument for this function
+2018-01-10 09:31:42,637 [myTransport.views:500] [views:userOption] [ERROR]- exception log
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 371, in userOption
+    bindWorkId.objects.create(user = user,workId = request.POST.get('workId',''),is_superuser=int(request.POST.get('is_superuser',1)))
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/query.py", line 346, in create
+    obj = self.model(**kwargs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/base.py", line 480, in __init__
+    raise TypeError("'%s' is an invalid keyword argument for this function" % list(kwargs)[0])
+TypeError: 'is_superuser' is an invalid keyword argument for this function
+2018-01-10 09:31:42,638 [myTransport.views:501] [views:userOption] [ERROR]- 'is_superuser' is an invalid keyword argument for this function
+2018-01-10 09:33:59,656 [myTransport.views:501] [views:userOption] [ERROR]- exception log
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 396, in userOption
+    user.is_superuser = int(request.POST.get('is_superuser'))
+TypeError: int() argument must be a string or a number, not 'NoneType'
+2018-01-10 09:33:59,657 [myTransport.views:502] [views:userOption] [ERROR]- int() argument must be a string or a number, not 'NoneType'
+2018-01-10 09:34:26,688 [myTransport.views:501] [views:userOption] [ERROR]- exception log
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 396, in userOption
+    user.is_superuser = int(request.POST.get('is_superuser'))
+TypeError: int() argument must be a string or a number, not 'NoneType'
+2018-01-10 09:34:26,688 [myTransport.views:502] [views:userOption] [ERROR]- int() argument must be a string or a number, not 'NoneType'
+2018-01-10 09:47:19,917 [myTransport.views:504] [views:userOption] [ERROR]- exception log
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 372, in userOption
+    bindWorkId.objects.create(user = user,workId = request.POST.get('workId',''))
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/query.py", line 348, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/base.py", line 734, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/base.py", line 762, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/base.py", line 846, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/base.py", line 885, in _do_insert
+    using=using, raw=raw)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/query.py", line 920, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 973, in execute_sql
+    for sql, params in self.as_sql():
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 931, in as_sql
+    for obj in self.query.objs
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 710, in get_db_prep_save
+    prepared=False)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 702, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "/root/django/django1.8/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 1868, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'fads'
+2018-01-10 09:47:19,919 [myTransport.views:505] [views:userOption] [ERROR]- invalid literal for int() with base 10: 'fads'
+2018-01-10 09:49:25,723 [myTransport.views:43] [views:process_request] [ERROR]- in function process_request :User matching query does not exist.
+2018-01-10 09:50:49,424 [myTransport.views:43] [views:process_request] [ERROR]- in function process_request :User matching query does not exist.
+2018-01-10 10:07:06,550 [myTransport.views:330] [views:removeFile] [ERROR]- exception log
+Traceback (most recent call last):
+  File "/root/django/django1.8/filetransport/myTransport/views.py", line 320, in removeFile
+    logger.info("用户%s 删除文件%s" % (request.user,request_path))
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xe7 in position 0: ordinal not in range(128)
+2018-01-10 10:07:06,550 [myTransport.views:331] [views:removeFile] [ERROR]- 'ascii' codec can't decode byte 0xe7 in position 0: ordinal not in range(128)
+2018-01-10 10:28:23,027 [myTransport.views:167] [views:upload_file] [ERROR]- 用户的上传数额已达最大限制！
+2018-01-10 10:29:09,230 [myTransport.views:167] [views:upload_file] [ERROR]- 用户的上传数额已达最大限制！
+2018-01-10 10:29:09,242 [myTransport.views:167] [views:upload_file] [ERROR]- 用户的上传数额已达最大限制！
+2018-01-10 10:29:09,278 [myTransport.views:167] [views:upload_file] [ERROR]- 用户的上传数额已达最大限制！
+2018-01-10 10:29:09,358 [myTransport.views:167] [views:upload_file] [ERROR]- 用户的上传数额已达最大限制！
+2018-01-10 10:29:09,436 [myTransport.views:167] [views:upload_file] [ERROR]- 用户的上传数额已达最大限制！
+2018-01-10 10:29:09,501 [myTransport.views:167] [views:upload_file] [ERROR]- 用户的上传数额已达最大限制！
+2018-01-10 10:29:09,583 [myTransport.views:167] [views:upload_file] [ERROR]- 用户的上传数额已达最大限制！
+2018-01-10 10:29:09,998 [myTransport.views:167] [views:upload_file] [ERROR]- 用户的上传数额已达最大限制！
+2018-01-10 10:29:10,051 [myTransport.views:167] [views:upload_file] [ERROR]- 用户的上传数额已达最大限制！
+2018-01-10 10:29:10,102 [myTransport.views:167] [views:upload_file] [ERROR]- 用户的上传数额已达最大限制！
+2018-01-10 10:29:10,207 [myTransport.views:167] [views:upload_file] [ERROR]- 用户的上传数额已达最大限制！
+2018-01-10 10:29:10,513 [myTransport.views:167] [views:upload_file] [ERROR]- 用户的上传数额已达最大限制！

@@ -1,0 +1,120 @@
+{% extends "index.html" %}
+{% block script %}
+<script src="/static/assets/js/jquery.dataTables.min.js"></script>
+<script src="/static/assets/js/dataTables.bootstrap.min.js"></script>
+
+<script src="/static/assets/js/bootstrap-switch/bootstrap-switch.min.js"></script>
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="/static/assets/js/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet" href="/static/assets/js/bootstrap-switch/bootstrap-switch.min.css" rel='stylesheet' type='text/css' />
+{% endblock %}
+{% block modal %}
+{% endblock %}
+{%block myContent%}
+<style type="text/css">
+.form-control {
+		background: none !important;
+		border: 1px solid #ddd !important;
+		border-radius: 0px !important;
+		box-shadow: none !important;
+	}	
+.dataTables_filter>label{
+		float:right;
+	}	
+</style>
+<div class="container-fluid">
+	<div class="panel panel-default">
+	
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				本地上传
+			</h3>
+		</div>
+		<div class="panel-body">
+			<table class='table table-striped table-bordered table-hover' id='logTable'>
+				<thead>
+					<tr class="headtr">
+						<th>用户</th>
+						<th>ip地址</th>
+						<th>操作</th>
+						<th>文件名</th>
+						<th>文件大小</th>
+						<th>时间</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>			
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(event){
+	logTable = $('#logTable').DataTable({
+			"ajax": {
+				"url": "/log/getLogData",
+				"data": function (d) {
+					//d.type = 'getPeriodData'
+				},
+			},
+			"lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
+			"processing": true,
+			"serverSide": true,
+			"columns": [
+				{
+					"data": 'username',
+				},
+				{'data':'remote_addr'},
+				{'data':'action'},
+				{'data':'file'},
+				{'data':'file_size'},
+				{'data':'ops_time'},
+			],
+			"order": [[5, 'desc']],
+			"columnDefs": [
+				{
+					'targets': 2,
+					'searchable':false,
+					'orderable':false,
+					'className': 'dt-body-center',
+					'render': function (a, b, c, d){
+						if (c.action == 0) {
+					 		return '上传';
+					 	}else{
+					 		return '下载';
+					 	}
+					},
+				},								
+			],			
+		
+			'language': {
+				"sProcessing": "处理中...",
+				"sLengthMenu": "显示 _MENU_ 项结果",
+				"sZeroRecords": "没有匹配结果",
+				"sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+				"sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+				"sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+				"sInfoPostFix": "",
+				"sSearch": "搜索:",
+				"sUrl": "",
+				"sEmptyTable": "表中数据为空",
+				"sLoadingRecords": "载入中...",
+				"sInfoThousands": ",",
+				"oPaginate": {
+					"sFirst": "首页",
+					"sPrevious": "上页",
+					"sNext": "下页",
+					"sLast": "末页"
+				},
+				"oAria": {
+					"sSortAscending": ": 以升序排列此列",
+					"sSortDescending": ": 以降序排列此列"
+				}
+			},
+		
+		
+		})	
+})
+</script>
+{%endblock%}
