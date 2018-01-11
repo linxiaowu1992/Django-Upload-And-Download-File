@@ -13,89 +13,9 @@ from django.conf import settings
 from django.http import StreamingHttpResponse
 import shutil
 # Create your views here.
-# 
-class  ExteriorAuthMiddleware(object):
-    #判断登录 权限控制
-	def process_request(self,request):
-		if request.method == 'GET':
-			requestData = request.GET
-		else:
-			requestData = request.POST		
-		request.session['errmsg']=''
-		if not request.session.has_key('_auth_user_id') and 'login' not in request.path:
-			return HttpResponseRedirect('/login/')
-
-		elif request.session.has_key('_auth_user_id') and 'logout' not in request.path:
-			###权限检验
-			try:
-				u=User.objects.get(username=request.user)
-
-				if u.usertoken_set.all():
-					if u.usertoken_set.all()[0].token != request.session['Token']:
-						logger.error("token 不一致！")
-						return HttpResponseRedirect('/login/')
-				else:
-					logger.error("获取不到token!")
-					return HttpResponseRedirect('/login/')
-
-				url=request.META['PATH_INFO']
-				print request.get_full_path()
-				if not u.is_superuser:
-					if url.startswith('/transport/user_') or url.startswith('/log/'):
-						return error403(request, "权限不够！")
-			except Exception,e:
-				logger.error("in function process_request :"+ str(e))
-				return HttpResponseRedirect('/login/')
-
-		if request.session.has_key('_auth_user_id') and 'login' in request.path:
-			return HttpResponseRedirect('/index/')
-###登录
 def mylogin(request):
 	if request.method == 'GET':
 		return render_to_response('login.html',{'error':request.session['errmsg'] if request.session.has_key('errmsg') else ''})
-###微信扫码登录
-def login_for_polar(request):
-    '''登录接口'''
-    next = request.GET.get('next','/index/')
-    code = request.GET.get('code','')
-    client_ip = request.META.get("REMOTE_ADDR",None)
-    #logger.info(str(request.META))
-    # 访问后端接口
-    appid = 'polar_yw'
-    loginIp = client_ip
-    params = {'code': code, 'appid': appid, 'loginIp': loginIp}
-    #resp = requests.get('http://open.5jli.com/oauth2/access_token?code={}&appid={}&loginIp={}'.format(code, appid, loginIp))
-    resp = requests.get('http://open.5jli.com/oauth2/access_token', params=params)
-    if resp.status_code == 200:
-        resp_data = resp.json()
-        msg = ''
-         
-        authentication_state = resp_data.get('state', None)
-        user_number = resp_data.get('data', '').get('no', '')
-        # 认证结果判断
-        if authentication_state != 1:
-            msg = '认证失败'
-        elif user_number == '':
-            msg = '不存在工号'
-        else:
-            # 假装在用帐密登录, 调用Django认证系统
-            userid = bindWorkId.objects.get(workId=user_number).user_id
-            user = User.objects.get(id = userid)
-            user.backend='django.contrib.auth.backends.ModelBackend'
-            if user is not None:
-            	if user.is_active:
-            		login(request, user)
-            		saveToken(user,request=request)
-            		return HttpResponseRedirect('/index/')
-            	else:
-            		msg='该用户还没有激活！'
-            else:
-            	msg = '该用户不存在，请先注册！'
-    else:
-        msg = '认证接口返回值错误'
-    logger.error(msg)
-    #return HttpResponseRedirect('/jguser/login') 
-    return render_to_response('login.html',{'code':False,'error':msg},context_instance=RequestContext(request))
 ####主页
 def index(request):
 	return HttpResponseRedirect('/transport/page')
@@ -128,19 +48,8 @@ def upload_file(request,r_url):
 	try:
 		if request.method == 'POST':
 			requestData = request.POST
-			#if requestData.has_key('type'):
-			#	if requestData['type'] == 'uploadFile':
-			#		with open(requestData['filename'],'wb+') as f:
-			#			for chunk in request.FILES.get('file').chunks():
-			#				f.write(chunk)
-			#		return JsonResponse({'code':200})
-			#	elif requestData['type'] == 'getFileList':
-			#		return JsonResponse(getFileListFromClient(request.user, requestData['relative_path']))
 		else:
 			requestData = request.GET
-			#if requestData.has_key('type'):
-			#	if requestData['type'] == 'page':
-			#		return render_to_response('upload.html',{},context_instance=RequestContext(request))
 		if r_url == 'page':
 			return render_to_response('upload.html',{},context_instance=RequestContext(request))
 		elif r_url == 'upload':

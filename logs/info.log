@@ -2922,3 +2922,22 @@ UnicodeDecodeError: 'ascii' codec can't decode byte 0xe7 in position 0: ordinal 
 2018-01-11 01:35:15,428 [myTransport.views:199] [views:upload_file] [INFO]- 用户 linxiaowu 上传文件0a5b3d4a5774cee7efb165ef18bc906c.jpg成功！
 2018-01-11 01:35:15,451 [myTransport.views:205] [views:upload_file] [INFO]- 用户linxiaowu获取文件路径：/tmp/linxiaowu
 2018-01-11 03:39:54,809 [myTransport.views:205] [views:upload_file] [INFO]- 用户linxiaowu获取文件路径：/tmp/linxiaowu
+2018-01-11 04:05:55,572 [myTransport.views:114] [views:upload_file] [INFO]- 用户linxiaowu获取文件路径：/tmp/linxiaowu
+2018-01-11 04:05:55,623 [django.request:170] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2018-01-11 04:05:59,756 [myTransport.views:254] [views:logOption] [INFO]- 获取日志数据...
+2018-01-11 04:06:06,216 [django.request:256] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /login/
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/Django-1.8.5-py2.7.egg/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/tmp/filetransport/myTransport/views.py", line 18, in mylogin
+    return render_to_response('login.html',{'error':request.session['errmsg'] if request.session.has_key('errmsg') else ''})
+  File "/usr/lib/python2.7/site-packages/Django-1.8.5-py2.7.egg/django/shortcuts.py", line 39, in render_to_response
+    content = loader.render_to_string(template_name, context, using=using)
+  File "/usr/lib/python2.7/site-packages/Django-1.8.5-py2.7.egg/django/template/loader.py", line 98, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/usr/lib/python2.7/site-packages/Django-1.8.5-py2.7.egg/django/template/loader.py", line 46, in get_template
+    raise TemplateDoesNotExist(template_name)
+TemplateDoesNotExist: login.html
+2018-01-11 04:06:15,692 [myTransport.views:114] [views:upload_file] [INFO]- 用户AnonymousUser获取文件路径：/tmp/AnonymousUser
+2018-01-11 04:06:29,799 [myTransport.views:415] [views:userOption] [INFO]- is_superuser:True
+2018-01-11 04:06:34,331 [myTransport.views:415] [views:userOption] [INFO]- is_superuser:True
